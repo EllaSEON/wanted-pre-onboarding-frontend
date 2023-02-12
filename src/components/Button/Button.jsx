@@ -1,6 +1,14 @@
 import { StyledBtn, SIZES, COLOR } from "./Button.style";
 
-const Button = ({ type, disabled, children, size, btncolor, onClick }) => {
+const Button = ({
+  type,
+  disabled,
+  children,
+  size,
+  btncolor,
+  onClick,
+  className,
+}) => {
   const sizeStyle = SIZES[size];
   const btnColor = COLOR[btncolor];
   return (
@@ -10,6 +18,7 @@ const Button = ({ type, disabled, children, size, btncolor, onClick }) => {
       sizeStyle={sizeStyle}
       btncolor={btnColor}
       onClick={onClick}
+      className={className}
     >
       {children}
     </StyledBtn>
