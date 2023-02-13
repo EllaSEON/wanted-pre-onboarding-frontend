@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthAPI from "../../api/AuthAPI";
+import { AuthContext } from "../../context/context";
 import Input from "../Input/Input";
 import * as S from "./AuthForm.style";
 
 const AuthForm = ({ signUp }) => {
   const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
+  const { dispatch } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isValid, setIsValid] = useState(false); // disabled를 결정하는 state
@@ -34,9 +37,22 @@ const AuthForm = ({ signUp }) => {
     } else {
       const data = await AuthAPI.getSignIn(email, password);
       localStorage.setItem("access_token", data.data.access_token);
-      navigate("/todolist");
+
+      const loginData = {
+        access_token: data.data.access_token,
+      };
+
+      dispatch({ type: "login", payload: loginData });
+      navigate("/todo");
     }
   };
+
+  // 로컬스토리지에 토큰 있는 상태라면 todo 경로
+  useEffect(() => {
+    if (user.access_token !== null) {
+      navigate("/todo");
+    }
+  });
 
   return (
     <S.InputFormWrapper>
