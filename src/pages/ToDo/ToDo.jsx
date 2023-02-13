@@ -1,23 +1,66 @@
+import { useState, useContext, useEffect } from "react";
+import { AuthContext } from "../../context/context";
 import ToDoItem from "../../components/ToDoItem/ToDoItem";
+import ToDoAPI from "../../api/ToDoAPI";
 import * as S from "./ToDo.style";
-import TodolistTitle from "../../assets/Todolist-title.svg";
+import ToDoListTitle from "../../assets/Todolist-title.svg";
 import Button from "../../components/Button/Button";
 
 const ToDo = () => {
+  const { user } = useContext(AuthContext);
+  const [todo, setTodo] = useState("");
+  const [todoList, setTodoList] = useState([]);
+
+  const handleData = (event) => {
+    if (event.target.id === "todo") {
+      setTodo(event.target.value);
+    }
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const data = await ToDoAPI.createTodo(todo, user.access_token);
+    window.location.reload();
+    return data;
+  };
+
+  useEffect(() => {
+    const setToDoList = async () => {
+      const data = await ToDoAPI.getTodo(user.access_token);
+      setTodoList(data.data);
+      console.log(data.data);
+    };
+    setToDoList();
+  }, []);
+
   return (
     <S.ToDoListWrapper>
       <S.TitleHeader>
-        <S.TitleImg src={TodolistTitle} />
+        <S.TitleImg src={ToDoListTitle} />
       </S.TitleHeader>
       <S.TodoListMain>
         <S.InpWrapper>
-          <S.TodoInput type="text" placeholder="내용을 입력해주세요" />
-          <Button type="button" btncolor="ocher" children="추가" size="s" />
+          <S.TodoInput
+            type="text"
+            data-testid="new-todo-input"
+            placeholder="내용을 입력해주세요"
+            value={todo}
+            onChange={handleData}
+            id="todo"
+          />
+          <Button
+            type="button"
+            data-testid="new-todo-add-button"
+            btncolor="ocher"
+            children="추가"
+            size="s"
+            onClick={handleSubmit}
+          />
         </S.InpWrapper>
         <S.TodoUl>
-          <ToDoItem />
-          <ToDoItem />
-          <ToDoItem />
+          {todoList.map((item) => {
+            return <ToDoItem key={item.id} content={item.todo} />;
+          })}
         </S.TodoUl>
       </S.TodoListMain>
     </S.ToDoListWrapper>

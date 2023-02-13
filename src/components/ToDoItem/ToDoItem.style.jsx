@@ -2,8 +2,9 @@ import styled from "styled-components";
 import Button from "../Button/Button";
 
 export const ToDoItemWrapper = styled.li`
-  width: 90%;
+  width: 36rem;
   display: flex;
+  justify-content: space-between;
   align-items: center;
   padding: 1rem;
   border-bottom: 1px dashed var(--border-color);
