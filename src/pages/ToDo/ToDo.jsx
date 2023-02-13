@@ -33,10 +33,22 @@ const ToDo = () => {
     setToDoList();
   }, []);
 
+  const handleLogout = () => {
+    localStorage.clear();
+    window.location = "/";
+  };
+
   return (
     <S.ToDoListWrapper>
       <S.TitleHeader>
         <S.TitleImg src={ToDoListTitle} />
+        <S.LogOutBtn
+          type="button"
+          btncolor="gray"
+          size="s"
+          children="로그아웃"
+          onClick={handleLogout}
+        />
       </S.TitleHeader>
       <S.TodoListMain>
         <S.InpWrapper>
