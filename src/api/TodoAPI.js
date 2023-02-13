@@ -22,6 +22,15 @@ const ToDoApi = {
     });
     return Data;
   },
+  async deleteTodo(id, access_token) {
+    if (window.confirm(`${id}번 째 리스트를 삭제하시겠습니까?`)) {
+      await axios.delete(`${BASE_URL}todos/${id}`, {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+      });
+    }
+  },
 };
 
 export default ToDoApi;

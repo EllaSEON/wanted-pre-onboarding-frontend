@@ -71,7 +71,14 @@ const ToDo = () => {
         </S.InpWrapper>
         <S.TodoUl>
           {todoList.map((item) => {
-            return <ToDoItem key={item.id} content={item.todo} />;
+            return (
+              <ToDoItem
+                key={item.id}
+                content={item.todo}
+                id={item.id}
+                setTodoList={setTodoList}
+              />
+            );
           })}
         </S.TodoUl>
       </S.TodoListMain>
