@@ -16,7 +16,6 @@ export const CheckBoxLabel = styled.label`
 
 export const CheckBox = styled.input`
   position: fixed;
-  top: 15px;
 `;
 
 export const ToDoText = styled.span`
