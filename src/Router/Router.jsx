@@ -1,17 +1,31 @@
+import { useContext } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AuthContext } from "../context/context";
 import Splash from "../pages/Splash/Splash";
 import SignUp from "../pages/SignUp/SignUp";
 import SignIn from "../pages/SignIn/SingIn";
-import ToDoList from "../pages/ToDoList/ToDoList";
+import ToDo from "../pages/ToDo/ToDo";
 
 const Router = () => {
+  const { user } = useContext(AuthContext);
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Splash />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/todolist" element={<ToDoList />} />
+        {user.access_token ? (
+          <Route>
+            <Route path="/" element={<Splash />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/todo" element={<ToDo />} />
+          </Route>
+        ) : (
+          <Route>
+            <Route path="/" element={<Splash />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/signin" element={<SignIn />} />
+          </Route>
+        )}
       </Routes>
     </BrowserRouter>
   );
