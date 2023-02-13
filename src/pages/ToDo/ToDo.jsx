@@ -1,5 +1,14 @@
+import ToDoItem from "../../components/ToDoItem/ToDoItem";
+import * as S from "./ToDo.style";
+
 const ToDo = () => {
-  return <div>투두리스트</div>;
+  return (
+    <S.ToDoListWrapper>
+      <S.TodoListUl>
+        <ToDoItem />
+      </S.TodoListUl>
+    </S.ToDoListWrapper>
+  );
 };
 
 export default ToDo;
