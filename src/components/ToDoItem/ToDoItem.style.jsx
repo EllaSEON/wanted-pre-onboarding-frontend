@@ -2,7 +2,6 @@ import styled from "styled-components";
 import Button from "../Button/Button";
 
 export const ToDoItemWrapper = styled.li`
-  white-space: nowrap;
   width: 90%;
   display: flex;
   align-items: center;
@@ -11,12 +10,12 @@ export const ToDoItemWrapper = styled.li`
 `;
 
 export const CheckBoxLabel = styled.label`
+  white-space: nowrap;
   overflow-x: auto;
 `;
 
 export const CheckBox = styled.input`
   position: fixed;
-  top: 15px;
 `;
 
 export const ToDoText = styled.span`
@@ -26,7 +25,7 @@ export const ToDoText = styled.span`
 `;
 
 export const BtnWrapper = styled.div`
-  margin-left: auto;
+  display: flex;
 `;
 
 export const ToDoBtn = styled(Button)`

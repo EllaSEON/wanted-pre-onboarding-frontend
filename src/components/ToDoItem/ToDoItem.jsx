@@ -1,4 +1,3 @@
-import Button from "../Button/Button";
 import * as S from "./ToDoItem.style";
 
 const ToDoItem = () => {
