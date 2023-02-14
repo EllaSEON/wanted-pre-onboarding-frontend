@@ -38,7 +38,6 @@ const AuthForm = ({ signUp }) => {
         navigate("/signin");
       } catch (error) {
         notice("error", error.response.data.message);
-        // console.log(error.response.data.message);
       }
     } else {
       try {
