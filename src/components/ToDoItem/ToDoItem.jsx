@@ -3,11 +3,12 @@ import { AuthContext } from "../../context/context";
 import ToDoAPI from "../../api/ToDoApi";
 import * as S from "./ToDoItem.style";
 
-const ToDoItem = ({ content, id, setTodoList, isCompleted }) => {
+const ToDoItem = ({ item, setTodoList }) => {
   const { user } = useContext(AuthContext);
-
+  const [todoData, setTodoData] = useState(item);
   const [isEdit, setIsEdit] = useState(false);
-  const [updatedToDo, setUpdatedToDo] = useState(content);
+  const [updatedToDo, setUpdatedToDo] = useState(todoData.todo);
+  // const [isChecked, setIsChecked] = useState(todoData.isCompleted);
 
   // 수정 버튼 클릭
   const changeInput = () => {
@@ -17,23 +18,40 @@ const ToDoItem = ({ content, id, setTodoList, isCompleted }) => {
   // 수정 취소
   const handleCancel = () => {
     setIsEdit(false);
-    setUpdatedToDo(content);
+    setUpdatedToDo(todoData.todo);
   };
 
-  // 수정된 내용 제출
-  const handleModify = async () => {
-    const res = await ToDoAPI.updateTodo(id, user.access_token, updatedToDo);
-    console.log(res);
+  // 체크 버튼 수정
+  const handleChangeCheck = async () => {
+    const res = await ToDoAPI.updateTodo(
+      todoData.id,
+      user.access_token,
+      updatedToDo,
+      !todoData.isCompleted
+    );
+    setTodoData({ ...res.data });
+  };
+
+  // 수정된 텍스트 제출
+  const handleChangeText = async () => {
+    const res = await ToDoAPI.updateTodo(
+      todoData.id,
+      user.access_token,
+      updatedToDo,
+      todoData.isCompleted
+    );
+    // console.log(res);
     // setUpdatedToDo({ ...res.data.todo });
+    setTodoData({ ...res.data });
     setIsEdit(false);
   };
 
   // 삭제 버튼 클릭
   const handleRemove = async () => {
-    const isConfirm = await ToDoAPI.deleteTodo(id, user.access_token);
+    const isConfirm = await ToDoAPI.deleteTodo(todoData.id, user.access_token);
     if (isConfirm) {
       setTodoList((prevList) => {
-        return prevList.filter((list) => list.id !== id);
+        return prevList.filter((list) => list.id !== todoData.id);
       });
     }
   };
@@ -41,9 +59,14 @@ const ToDoItem = ({ content, id, setTodoList, isCompleted }) => {
   return (
     <S.ToDoItemWrapper>
       <S.CheckBoxLabel htmlfor="toDoItem">
+        <S.CheckBox
+          id="toDoItem"
+          type="checkbox"
+          checked={todoData.isCompleted}
+          onChange={handleChangeCheck}
+        />
         {isEdit ? (
           <>
-            <S.CheckBox id="toDoItem" type="checkbox" />
             <S.ModifyInput
               data-testid="modify-input"
               type="text"
@@ -56,8 +79,7 @@ const ToDoItem = ({ content, id, setTodoList, isCompleted }) => {
         ) : (
           <>
             {" "}
-            <S.CheckBox id="toDoItem" type="checkbox" />
-            <S.ToDoText>{content}</S.ToDoText>
+            <S.ToDoText>{todoData.todo}</S.ToDoText>
           </>
         )}
       </S.CheckBoxLabel>
@@ -69,7 +91,7 @@ const ToDoItem = ({ content, id, setTodoList, isCompleted }) => {
               data-testid="submit-button"
               size="s"
               children="제출"
-              onClick={handleModify}
+              onClick={handleChangeText}
               btncolor="purple"
             />
             <S.ToDoBtn

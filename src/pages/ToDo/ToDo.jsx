@@ -83,15 +83,7 @@ const ToDo = () => {
         <S.TodoUl>
           {todoList.map((item) => {
             return (
-              <ToDoItem
-                key={item.id}
-                content={item.todo}
-                setTodo={setTodo}
-                id={item.id}
-                setTodoList={setTodoList}
-                isCompleted={isCompleted}
-                setIsCompleted={setIsCompleted}
-              />
+              <ToDoItem key={item.id} item={item} setTodoList={setTodoList} />
             );
           })}
         </S.TodoUl>

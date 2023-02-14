@@ -32,10 +32,10 @@ const ToDoApi = {
     }
     return isConfirm;
   },
-  async updateTodo(id, access_token, updatedToDo) {
+  async updateTodo(id, access_token, todo, isCompleted) {
     const data = await axios.put(
       `${BASE_URL}todos/${id}`,
-      { todo: updatedToDo, isCompleted: true },
+      { todo, isCompleted },
       {
         headers: {
           Authorization: `Bearer ${access_token}`,
