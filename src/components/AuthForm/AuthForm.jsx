@@ -89,13 +89,13 @@ const AuthForm = ({ signUp }) => {
           />
           {signUp ? (
             <S.SubmitBtn
-              data-testid="signin-button"
+              data-testid="signup-button"
               children="회원가입"
               disabled={!isValid}
             />
           ) : (
             <S.SubmitBtn
-              data-testid="signup-button"
+              data-testid="signin-button"
               children="로그인"
               disabled={!isValid}
             />

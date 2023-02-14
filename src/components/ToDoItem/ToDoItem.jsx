@@ -39,8 +39,6 @@ const ToDoItem = ({ item, setTodoList }) => {
       updatedToDo,
       todoData.isCompleted
     );
-    // console.log(res);
-    // setUpdatedToDo({ ...res.data.todo });
     setTodoData({ ...res.data });
     setIsEdit(false);
   };
@@ -77,7 +75,6 @@ const ToDoItem = ({ item, setTodoList }) => {
           </>
         ) : (
           <>
-            {" "}
             <S.ToDoText>{todoData.todo}</S.ToDoText>
           </>
         )}
