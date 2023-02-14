@@ -1,7 +1,7 @@
 import axios from "axios";
 import BASE_URL from "./baseUrl";
 
-const ToDoApi = {
+const TodoAPI = {
   async createTodo(todo, access_token) {
     await axios.post(
       `${BASE_URL}todos`,
@@ -46,4 +46,4 @@ const ToDoApi = {
   },
 };
 
-export default ToDoApi;
+export default TodoAPI;

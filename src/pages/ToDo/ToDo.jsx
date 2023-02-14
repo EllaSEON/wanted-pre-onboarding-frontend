@@ -2,7 +2,7 @@ import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/context";
 import ToDoItem from "../../components/ToDoItem/ToDoItem";
-import ToDoAPI from "../../api/ToDoAPI";
+import TodoAPI from "../../api/TodoAPI";
 import * as S from "./ToDo.style";
 import ToDoListTitle from "../../assets/Todolist-title.svg";
 import Button from "../../components/Button/Button";
@@ -21,8 +21,8 @@ const ToDo = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    await ToDoAPI.createTodo(todo, user.access_token);
-    const { data } = await ToDoAPI.getTodo(user.access_token);
+    await TodoAPI.createTodo(todo, user.access_token);
+    const { data } = await TodoAPI.getTodo(user.access_token);
     setTodoList(data);
     console.log(data);
     setTodo("");
@@ -30,7 +30,7 @@ const ToDo = () => {
 
   useEffect(() => {
     const setToDoList = async () => {
-      const { data } = await ToDoAPI.getTodo(user.access_token);
+      const { data } = await TodoAPI.getTodo(user.access_token);
       setTodoList(data);
       console.log(data);
     };

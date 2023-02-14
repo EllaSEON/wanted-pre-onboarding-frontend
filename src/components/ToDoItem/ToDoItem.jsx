@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/context";
-import ToDoAPI from "../../api/ToDoAPI";
+import ToDoAPI from "../../api/TodoAPI";
 import * as S from "./ToDoItem.style";
 
 const ToDoItem = ({ item, setTodoList }) => {
