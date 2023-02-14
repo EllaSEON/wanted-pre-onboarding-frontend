@@ -1,12 +1,14 @@
 import { useState, useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/context";
 import ToDoItem from "../../components/ToDoItem/ToDoItem";
-import ToDoAPI from "../../api/ToDoAPI";
+import ToDoAPI from "../../api/ToDoApi";
 import * as S from "./ToDo.style";
 import ToDoListTitle from "../../assets/Todolist-title.svg";
 import Button from "../../components/Button/Button";
 
 const ToDo = () => {
+  const navigate = useNavigate();
   const { user } = useContext(AuthContext);
   const [todo, setTodo] = useState("");
   const [todoList, setTodoList] = useState([]);
@@ -19,29 +21,38 @@ const ToDo = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = await ToDoAPI.createTodo(todo, user.access_token);
-    window.location.reload();
-    return data;
+    await ToDoAPI.createTodo(todo, user.access_token);
+    const { data } = await ToDoAPI.getTodo(user.access_token);
+    setTodoList(data);
+    console.log(data);
+    setTodo("");
   };
 
   useEffect(() => {
     const setToDoList = async () => {
-      const data = await ToDoAPI.getTodo(user.access_token);
-      setTodoList(data.data);
-      console.log(data.data);
+      const { data } = await ToDoAPI.getTodo(user.access_token);
+      setTodoList(data);
+      console.log(data);
     };
     setToDoList();
-  }, []);
+  }, [user.access_token]);
 
   const handleLogout = () => {
     localStorage.clear();
     window.location = "/";
   };
 
+  // 로컬스토리지에 토큰 없는 상태라면  signin 경로로 이동
+  useEffect(() => {
+    if (user.access_token === null) {
+      navigate("/signin");
+    }
+  });
+
   return (
     <S.ToDoListWrapper>
       <S.TitleHeader>
-        <S.TitleImg src={ToDoListTitle} />
+        <S.TitleImg src={ToDoListTitle} alt="오늘의 할일 제목" />
         <S.LogOutBtn
           type="button"
           btncolor="gray"
@@ -72,12 +83,7 @@ const ToDo = () => {
         <S.TodoUl>
           {todoList.map((item) => {
             return (
-              <ToDoItem
-                key={item.id}
-                content={item.todo}
-                id={item.id}
-                setTodoList={setTodoList}
-              />
+              <ToDoItem key={item.id} item={item} setTodoList={setTodoList} />
             );
           })}
         </S.TodoUl>

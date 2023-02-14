@@ -17,6 +17,9 @@ export const COLOR = {
   ocher: css`
     --button-bg-color: #ffba79;
   `,
+  purple: css`
+    --button-bg-color: #dadafc;
+  `,
 };
 
 export const StyledBtn = styled.button`
