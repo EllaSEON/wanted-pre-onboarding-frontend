@@ -3,18 +3,18 @@ import axios from "axios";
 
 const AuthAPI = {
   async getSignIn(email, password) {
-    const Data = await axios.post(`${BASE_URL}auth/signin`, {
+    const signInData = await axios.post(`${BASE_URL}auth/signin`, {
       email,
       password,
     });
-    return Data;
+    return signInData;
   },
   async getSignUp(email, password) {
-    const data = await axios.post(`${BASE_URL}auth/signup`, {
+    const signUpData = await axios.post(`${BASE_URL}auth/signup`, {
       email,
       password,
     });
-    return data;
+    return signUpData;
   },
 };
 

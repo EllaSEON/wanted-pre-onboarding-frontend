@@ -32,7 +32,6 @@ const ToDo = () => {
     const setToDoList = async () => {
       const { data } = await TodoAPI.getTodo(user.access_token);
       setTodoList(data);
-      console.log(data);
     };
     setToDoList();
   }, [user.access_token]);
