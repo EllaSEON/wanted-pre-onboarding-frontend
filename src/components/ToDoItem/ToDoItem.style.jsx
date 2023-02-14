@@ -2,24 +2,28 @@ import styled from "styled-components";
 import Button from "../Button/Button";
 
 export const ToDoItemWrapper = styled.li`
-  width: 90%;
+  width: 39rem;
   display: flex;
+  justify-content: space-between;
   align-items: center;
   padding: 1rem;
   border-bottom: 1px dashed var(--border-color);
 `;
 
 export const CheckBoxLabel = styled.label`
-  white-space: nowrap;
-  overflow-x: auto;
+  display: flex;
 `;
 
 export const CheckBox = styled.input`
-  position: fixed;
+  width: 2.2rem;
+  height: 2.2rem;
+  margin: 1rem;
 `;
 
 export const ToDoText = styled.span`
-  padding-left: 2.5rem;
+  display: block;
+  padding: 1rem;
+  width: 200px;
   font-size: 1.5rem;
   line-height: 1.5rem;
 `;

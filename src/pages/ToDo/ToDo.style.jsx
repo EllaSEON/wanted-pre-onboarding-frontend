@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { MainWrappCss, AllWrappCss } from "../../styles/Globalstyled";
+import Button from "../../components/Button/Button";
 
 export const ToDoListWrapper = styled.div`
   ${AllWrappCss}
@@ -8,11 +9,15 @@ export const ToDoListWrapper = styled.div`
 export const TitleHeader = styled.header`
   width: 390px;
   height: 20%;
-  text-align: center;
   background: var(--main-color);
 `;
 
 export const TitleImg = styled.img`
+  margin: 2rem 0 2rem 10rem;
+`;
+
+export const LogOutBtn = styled(Button)`
+  float: right;
   margin: 2rem;
 `;
 
