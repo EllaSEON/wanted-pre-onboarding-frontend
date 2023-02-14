@@ -10,7 +10,6 @@ import Button from "../../components/Button/Button";
 const ToDo = () => {
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
-  const [isCompleted, setIsCompleted] = useState(false);
   const [todo, setTodo] = useState("");
   const [todoList, setTodoList] = useState([]);
 
@@ -26,6 +25,7 @@ const ToDo = () => {
     const { data } = await ToDoAPI.getTodo(user.access_token);
     setTodoList(data);
     console.log(data);
+    setTodo("");
   };
 
   useEffect(() => {
