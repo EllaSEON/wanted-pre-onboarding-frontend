@@ -3,7 +3,9 @@ import { useNavigate } from "react-router-dom";
 import AuthAPI from "../../api/AuthAPI";
 import { AuthContext } from "../../context/context";
 import Input from "../Input/Input";
+import notice from "../../utils/noticeUtils";
 import * as S from "./AuthForm.style";
+import { ToastContainer } from "react-toastify";
 
 const AuthForm = ({ signUp }) => {
   const navigate = useNavigate();
@@ -31,19 +33,25 @@ const AuthForm = ({ signUp }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (signUp) {
-      const data = await AuthAPI.getSignUp(email, password);
-      navigate("/signin");
-      console.log(data);
+      try {
+        await AuthAPI.getSignUp(email, password);
+        navigate("/signin");
+      } catch (error) {
+        notice("error", error.response.data.message);
+        // console.log(error.response.data.message);
+      }
     } else {
-      const data = await AuthAPI.getSignIn(email, password);
-      localStorage.setItem("access_token", data.data.access_token);
-
-      const loginData = {
-        access_token: data.data.access_token,
-      };
-
-      dispatch({ type: "login", payload: loginData });
-      navigate("/todo");
+      try {
+        const data = await AuthAPI.getSignIn(email, password);
+        localStorage.setItem("access_token", data.data.access_token);
+        const loginData = {
+          access_token: data.data.access_token,
+        };
+        dispatch({ type: "login", payload: loginData });
+        navigate("/todo");
+      } catch (error) {
+        notice("error", error.response.data.message);
+      }
     }
   };
 
@@ -94,6 +102,7 @@ const AuthForm = ({ signUp }) => {
           )}
         </form>
       </S.MainWrapper>
+      <ToastContainer />
     </S.InputFormWrapper>
   );
 };

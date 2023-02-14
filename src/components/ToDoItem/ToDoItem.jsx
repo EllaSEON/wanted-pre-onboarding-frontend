@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/context";
-import ToDoAPI from "../../api/ToDoApi";
+import ToDoAPI from "../../api/ToDoAPI";
 import * as S from "./ToDoItem.style";
 
 const ToDoItem = ({ item, setTodoList }) => {
@@ -8,7 +8,6 @@ const ToDoItem = ({ item, setTodoList }) => {
   const [todoData, setTodoData] = useState(item);
   const [isEdit, setIsEdit] = useState(false);
   const [updatedToDo, setUpdatedToDo] = useState(todoData.todo);
-  // const [isChecked, setIsChecked] = useState(todoData.isCompleted);
 
   // 수정 버튼 클릭
   const changeInput = () => {
