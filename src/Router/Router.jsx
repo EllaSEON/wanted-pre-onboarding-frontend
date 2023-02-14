@@ -1,6 +1,4 @@
-import { useContext } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { AuthContext } from "../context/context";
 import Splash from "../pages/Splash/Splash";
 import SignUp from "../pages/SignUp/SignUp";
 import SignIn from "../pages/SignIn/SingIn";

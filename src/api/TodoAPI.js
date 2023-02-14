@@ -43,17 +43,6 @@ const ToDoApi = {
       }
     );
     return data;
-    // if (window.confirm(`${id}번 째 리스트를 수정하시겠습니까?`)) {
-    //   await axios.put(
-    //     `${BASE_URL}todos/${id}`,
-    //     { todo: updatedToDo, isCompleted: true },
-    //     {
-    //       headers: {
-    //         Authorization: `Bearer ${access_token}`,
-    //       },
-    //     }
-    //   );
-    // }
   },
 };
 

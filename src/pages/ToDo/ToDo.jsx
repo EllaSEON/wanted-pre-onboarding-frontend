@@ -2,7 +2,7 @@ import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/context";
 import ToDoItem from "../../components/ToDoItem/ToDoItem";
-import ToDoAPI from "../../api/ToDoApi";
+import ToDoAPI from "../../api/ToDoAPI";
 import * as S from "./ToDo.style";
 import ToDoListTitle from "../../assets/Todolist-title.svg";
 import Button from "../../components/Button/Button";
