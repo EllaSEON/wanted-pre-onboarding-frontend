@@ -8,26 +8,17 @@ import ToDo from "../pages/ToDo/ToDo";
 import NotFound from "../pages/NotFound/NotFound";
 
 const Router = () => {
-  const { user } = useContext(AuthContext);
-
   return (
     <BrowserRouter>
       <Routes>
-        {user.access_token ? (
-          <Route>
-            <Route path="/" element={<Splash />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/signin" element={<SignIn />} />
-            <Route path="/todo" element={<ToDo />} />
-          </Route>
-        ) : (
-          <Route>
-            <Route path="/" element={<Splash />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/signin" element={<SignIn />} />
-            <Route path="/*" element={<NotFound />} />
-          </Route>
-        )}
+        <Route path="/" element={<Splash />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/signin" element={<SignIn />} />
+        <Route path="/todo" element={<ToDo />} />
+        <Route path="/" element={<Splash />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/signin" element={<SignIn />} />
+        <Route path="/*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

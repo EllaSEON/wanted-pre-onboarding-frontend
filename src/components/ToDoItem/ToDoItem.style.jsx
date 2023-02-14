@@ -20,6 +20,13 @@ export const CheckBox = styled.input`
   margin: 1rem;
 `;
 
+export const ModifyInput = styled.input`
+  padding-left: 1rem;
+  border-radius: 10px;
+  outline: none;
+  font-size: 1.5rem;
+`;
+
 export const ToDoText = styled.span`
   display: block;
   padding: 1rem;
